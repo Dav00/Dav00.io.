@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajas Prueba</title>
+    <style>
+        div
+        {
+            width: 60px;
+            height: 60px;
+            margin: 3px;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+        <script>
+        	function iniciar()
+        	{
+        		sumarCaja(0);
+
+        	}
+        	function clickCaja()
+        	{
+        		if(document.getElementsByTagName("div").length == 32)
+        		{
+        			alert("-COMPLETO-");
+        		}
+        		else
+        		{
+        			sumarCaja(document.getElementsByTagName("div").length);
+        		}
+        	}
+            function numeroAleatorio(min, max)
+            {
+            //minimo incluido y maximo excluido
+            return Math.floor(Math.random() * (max - min)) + min;
+            }
+        	function sumarCaja(numero)
+        	{
+                if(numero < 10)
+                {
+                    aux2 = 'c0' + '<b>' + (numero + 1).toString() + '</b>';
+                }
+                else
+                {
+                    aux2 = 'c' + '<b>' + (numero + 1).toString() + '</b>'; 
+                }
+        		var aux = "caja"+(numero+1).toString();
+        		var ele = crearNodo('div', aux2, aux);
+        		ele.style.backgroundColor = coloresRGB();
+                if(numero % 8 == 0)
+                {
+                    ele.style.clear = 'left';
+                }
+        		ele.addEventListener('click',clickCaja,false);
+        	}
+        	function coloresRGB() 
+			{
+			var r = numeroAleatorio(0,256);
+			var g = numeroAleatorio(0,256);
+			var b = numeroAleatorio(0,256);
+			r = r.toString();
+			g = g.toString();
+			b = b.toString();
+			var col = "rgb(" + r + "," + g + "," + b + ")";
+			return col;
+			}
+        	function crearNodo(tipo, inner, id)
+        	{
+			// crea el nodo, lo pone en el body
+			var ele = document.createElement(tipo);
+			//append child es añadir un hijo
+			document.body.appendChild(ele);
+
+			ele.innerHTML = inner; // contenido
+			ele.id = id; // id del nodo
+			return ele; // retorna la referencia
+			}
+
+		window.onload = iniciar;
+        </script>
+</body>
+</html>
